@@ -1,0 +1,40 @@
+class Solution {
+public:
+    bool Find(int target, vector<vector<int> > array) {
+        int i = 0;
+        int n = array.size();
+        if(n == 0){
+            return false;
+        }
+        int m = array[0].size();
+        int Lmid = 0,Lleft = 0,Lright = n - 1;
+        int Rmid = 0,Rleft = 0,Rright = m - 1;
+        while(Lleft <= Lright&&Rleft < Rright){
+            if(Lleft == Lright){
+                Rmid = (Rleft + Rright)/2;
+                if(array[Lmid][Rmid] > target){
+                    Rright = Lmid - 1;
+                }
+                else if(array[Lmid][Rmid] < target){
+                    Rleft = Lmid + 1;
+                }
+                else{
+                    return true;
+                }
+            }
+            else{
+                Lmid = (Lleft + Lright)/2;
+                if(array[Lmid][m - 1] > target){
+                    Lright = Lmid;
+                }
+                else if(array[Lmid][m - 1] < target){
+                    Lleft = Lmid + 1;
+                }
+                else{
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+};
